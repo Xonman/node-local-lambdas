@@ -30,6 +30,26 @@ const logger = pino({name: 'app'}, prettyLogs);
 const slsConfig = ymlParser(path.resolve(process.cwd(), 'serverless.yml'));
 
 app.use(express.json({type: ['application/json','binary/octet-stream']}));
+/**
+ * Unfortunately the CLI SDK doesn't send a Content-Type in the request, try to parse it manually
+ */
+app.use((req, res, next) => {
+    if ( !req.get('Content-Type') || !req.body || Object.entries(req.body).length < 1 ) {
+        let body = '';
+        req.on('data', d => body += d);
+        req.on('end', () => {
+            if ( body.charAt(0) === '{' ) {
+                try {
+                    body = JSON.parse(body);
+                } catch(err) {
+                    return next(err);
+                }
+            req.body = body;
+            next();
+        });
+        req.resume();
+    }
+});
 
 // We need to setup a pattern that serves requests like below into a serverless function
 // POST /2015-03-31/functions/createKey/invocations 403 1.456 ms - 23
