@@ -44,8 +44,10 @@ app.use((req, res, next) => {
                 } catch(err) {
                     return next(err);
                 }
+            }
             req.body = body;
             next();
+            
         });
         req.resume();
     }
