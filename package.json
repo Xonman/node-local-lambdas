@@ -1,0 +1,32 @@
+{
+  "name": "local-lambdas",
+  "version": "1.0.0",
+  "description": "Mocks an AWS Lambda environment, allowing Lambdas to be invoked locally via the AWS SDK. Useful for testing interaction with lambdas locally without having to make a round-trip to AWS every invocation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xonman/node-local-lambdas.git"
+  },
+  "keywords": [
+    "lambda",
+    "serverless",
+    "sls",
+    "aws",
+    "amazon",
+    "faas"
+  ],
+  "author": "Luke Adlam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xonman/node-local-lambdas/issues"
+  },
+  "homepage": "https://github.com/Xonman/node-local-lambdas#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pino": "^4.17.3",
+    "require-yml": "^1.3.1"
+  }
+}
