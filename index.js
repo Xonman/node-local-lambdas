@@ -34,7 +34,7 @@ app.use(express.json({type: ['application/json','binary/octet-stream']}));
  * Unfortunately the CLI SDK doesn't send a Content-Type in the request, try to parse it manually
  */
 app.use((req, res, next) => {
-    if ( !req.get('Content-Type') || !req.body || Object.entries(req.body).length < 1 ) {
+    if ( !req.get('Content-Type') || !req.body || (Object.entries(req.body).length < 1 && req.get('Content-Length') > 0) ) {
         let body = '';
         req.on('data', d => body += d);
         req.on('end', () => {
@@ -50,6 +50,8 @@ app.use((req, res, next) => {
             
         });
         req.resume();
+    } else {
+        next();
     }
 });
 

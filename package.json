@@ -1,6 +1,6 @@
 {
   "name": "local-lambdas",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Mocks an AWS Lambda environment, allowing Lambdas to be invoked locally via the AWS SDK. Useful for testing interaction with lambdas locally without having to make a round-trip to AWS every invocation.",
   "main": "index.js",
   "scripts": {
